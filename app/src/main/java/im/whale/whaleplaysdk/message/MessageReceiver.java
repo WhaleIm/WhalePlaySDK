@@ -23,6 +23,10 @@ public class MessageReceiver extends BroadcastReceiver {
     private final String ACTION_RECEIVE;
     private OnMessageReceiveListener mOnMessageReceiveListener;
 
+    public interface OnMessageReceiveListener {
+        void onMessageReceive(String topic, String message);
+    }
+
     private MessageReceiver(String action) {
         ACTION_RECEIVE = action;
     }

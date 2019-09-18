@@ -1,5 +1,6 @@
 package im.whale.whaleplaysdk;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -8,9 +9,9 @@ import android.widget.TextView;
 
 import java.util.Date;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import im.whale.whaleplaysdk.message.MessageReceiver;
-import im.whale.whaleplaysdk.message.OnMessageReceiveListener;
 
 /**
  * 该页面示范了如何注册 MessageReceiver 以获取传感器数据。
@@ -22,6 +23,8 @@ import im.whale.whaleplaysdk.message.OnMessageReceiveListener;
  * @author ice
  */
 public class MainActivity extends AppCompatActivity {
+
+    private static final int REQUEST_SN = 118;
 
     private MessageReceiver mCommonMessageReceiver;
     private MessageReceiver mCameraMessageReceiver;
@@ -72,6 +75,22 @@ public class MainActivity extends AppCompatActivity {
                     mDeviceMessageReceiver.unregister(MainActivity.this);
             }
         });
+
+        /*申请获取配置信息*/
+        Intent intent = new Intent("im.whale.action.GET_CONFIG");
+        startActivityForResult(intent, REQUEST_SN); //REQUEST_SN为自定义int常数
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == REQUEST_SN) {
+            if (resultCode == RESULT_OK && data != null) {
+                String deviceSn = data.getStringExtra("device_sn"); //设备的sn号
+                String deviceId = data.getStringExtra("device_id"); //请求sn时发给服务的本机mac地址
+                String dataTopic = data.getStringExtra("data_topic"); // 接收mqtt数据的topic
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -88,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void registerCommon() {
         mCommonMessageReceiver.register(this);
-        mCommonMessageReceiver.setOnMessageReceiveListener(new OnMessageReceiveListener() {
+        mCommonMessageReceiver.setOnMessageReceiveListener(new MessageReceiver.OnMessageReceiveListener() {
             @Override
             public void onMessageReceive(String topic, String message) {
                 showMessage("Common " + topic + "\n" + message);
@@ -101,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void registerCamera() {
         mCameraMessageReceiver.register(this);
-        mCameraMessageReceiver.setOnMessageReceiveListener(new OnMessageReceiveListener() {
+        mCameraMessageReceiver.setOnMessageReceiveListener(new MessageReceiver.OnMessageReceiveListener() {
             @Override
             public void onMessageReceive(String topic, String message) {
                 showMessage("Camera " + topic + "\n" + message);
@@ -114,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void registerDevice() {
         mDeviceMessageReceiver.register(this);
-        mDeviceMessageReceiver.setOnMessageReceiveListener(new OnMessageReceiveListener() {
+        mDeviceMessageReceiver.setOnMessageReceiveListener(new MessageReceiver.OnMessageReceiveListener() {
             @Override
             public void onMessageReceive(String topic, String message) {
                 showMessage("Device " + topic + "\n" + message);
