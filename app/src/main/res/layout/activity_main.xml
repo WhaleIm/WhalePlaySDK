@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,33 +7,37 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/info_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Device SN: " />
+
     <CheckBox
         android:id="@+id/common_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register Common"
-        />
+        android:text="Register Common" />
 
     <CheckBox
         android:id="@+id/camera_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register Camera"
-        />
+        android:text="Register Camera" />
 
     <CheckBox
         android:id="@+id/device_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register Device"
-        />
+        android:text="Register Device" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
-        android:text="消息面板"/>
+        android:text="消息面板" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -45,7 +48,7 @@
         <TextView
             android:id="@+id/message_tv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </ScrollView>
 

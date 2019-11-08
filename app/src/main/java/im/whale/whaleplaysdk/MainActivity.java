@@ -6,6 +6,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -14,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import im.whale.whaleplaysdk.message.MessageReceiver;
 
 /**
- * 该页面示范了如何注册 MessageReceiver 以获取传感器数据。
+ * 该页面示范了如何注册 MessageReceiver 以获取传感器数据; 如何通过Intent获取设备sn。
  * 您设备上必须安装有WhalePlay才行。
  * 如果没有硬件传感器，你可以使用 WhalePlay 右上角悬浮按钮「模拟」common 数据。
  * <p>
@@ -30,13 +31,14 @@ public class MainActivity extends AppCompatActivity {
     private MessageReceiver mCameraMessageReceiver;
     private MessageReceiver mDeviceMessageReceiver;
 
-    private TextView mMessageTv;
+    private TextView mInfoTv, mMessageTv;
     private CheckBox mCommonCheckBox, mCameraCheckBox, mDeviceCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mInfoTv = findViewById(R.id.info_tv);
         mMessageTv = findViewById(R.id.message_tv);
         mCommonCheckBox = findViewById(R.id.common_check_box);
         mCameraCheckBox = findViewById(R.id.camera_check_box);
@@ -78,16 +80,22 @@ public class MainActivity extends AppCompatActivity {
 
         /*申请获取配置信息*/
         Intent intent = new Intent("im.whale.action.GET_CONFIG");
-        startActivityForResult(intent, REQUEST_SN); //REQUEST_SN为自定义int常数
+        if (intent.resolveActivity(getPackageManager()) == null) {
+            Toast.makeText(this, "请先安装 WhalePlay ", Toast.LENGTH_LONG).show();
+            mInfoTv.setText("! 请安装WhalePlay以正常使用当前App");
+        } else {
+            startActivityForResult(intent, REQUEST_SN); //REQUEST_SN为自定义int常数
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == REQUEST_SN) {
             if (resultCode == RESULT_OK && data != null) {
+                /*获取到配置信息*/
                 String deviceSn = data.getStringExtra("device_sn"); //设备的sn号
-                String deviceId = data.getStringExtra("device_id"); //请求sn时发给服务的本机mac地址
-                String dataTopic = data.getStringExtra("data_topic"); // 接收mqtt数据的topic
+
+                mInfoTv.setText("Device SN: " + deviceSn);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
