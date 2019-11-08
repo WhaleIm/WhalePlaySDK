@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
         mCameraCheckBox = findViewById(R.id.camera_check_box);
         mDeviceCheckBox = findViewById(R.id.device_check_box);
 
-        mCommonMessageReceiver = new MessageReceiver.Factory().common();
-        mCameraMessageReceiver = new MessageReceiver.Factory().camera();
-        mDeviceMessageReceiver = new MessageReceiver.Factory().device();
+        mCommonMessageReceiver = MessageReceiver.Factory.common();
+        mCameraMessageReceiver = MessageReceiver.Factory.camera();
+        mDeviceMessageReceiver = MessageReceiver.Factory.device();
 
         mCommonCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

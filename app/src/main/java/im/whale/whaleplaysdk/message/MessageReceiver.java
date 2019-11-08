@@ -10,7 +10,7 @@ import android.content.IntentFilter;
  * 接收来自WhalePlay转发的传感器消息。
  * <p>
  * 原始数据有硬件传感器、相机传感器两种。
- * 通过工厂创建实例{@link Factory}
+ * 通过静态工厂创建实例{@link Factory}
  * <p>
  * Created on 2019-08-31.
  *
@@ -77,16 +77,19 @@ public class MessageReceiver extends BroadcastReceiver {
          */
         private static final String ACTION_RECEIVE_COMMON = "im.whale.action.MQTT_RECEIVE";
 
-        public MessageReceiver common() {
+        public static MessageReceiver common() {
             return new MessageReceiver(ACTION_RECEIVE_COMMON);
         }
 
-        public MessageReceiver camera() {
+        public static MessageReceiver camera() {
             return new MessageReceiver(ACTION_RECEIVE_CAMERA);
         }
 
-        public MessageReceiver device() {
+        public static MessageReceiver device() {
             return new MessageReceiver(ACTION_RECEIVE_DEVICE);
+        }
+
+        private Factory() {
         }
     }
 
