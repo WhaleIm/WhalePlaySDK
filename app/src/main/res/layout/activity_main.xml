@@ -7,12 +7,23 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
+
     <TextView
         android:id="@+id/info_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Device SN: " />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="根据需要可以注册3种类型的消息：
+        \nCommon消息为经过处理过的业务消息，具体类型请在WhalePlay开放平台查阅文档。
+        \nCamera消息为人脸识别摄像头发出的识别消息，会包含年龄、性别、表情以及人脸id等信息。
+        \nDevice消息为传感器变化发出的消息。比如重力传感器有东西拿起、红外传感器感知到有东西拿开等等...会包含传感器id，状态或偏移量等信息。"
+        android:textColor="#333"
+        android:textSize="12sp" />
 
     <CheckBox
         android:id="@+id/common_check_box"
@@ -41,7 +52,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="#F7F6F3"
         android:padding="8dp">
 
@@ -51,5 +63,27 @@
             android:layout_height="wrap_content" />
 
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="传感器触发时，我们能拿到被触发的传感器的id，通过开放平台提供的api，我们能够知道该传感器所绑定的SKU，从而在屏幕上展示一些有趣的互动。详情见DEMO。"
+            android:textColor="#333"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/demo_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="查看demo" />
+
+    </LinearLayout>
 
 </LinearLayout>

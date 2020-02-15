@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:keepScreenOn="true"
+    android:orientation="vertical">
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/play_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:surface_type="texture_view"
+        app:use_controller="false" />
+
+    <FrameLayout
+        android:id="@+id/detail_layout"
+        android:layout_width="1080px"
+        android:layout_height="720px"
+        android:layout_gravity="center"
+        android:background="#7000"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/detail_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/detail_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:padding="16dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:text="鲸鱼岛" />
+
+        <ImageView
+            android:id="@+id/detail_close_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="8dp"
+            android:src="@drawable/ic_close_white_36dp" />
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/avatar_iv"
+        android:layout_width="128px"
+        android:layout_height="128px"
+        android:layout_gravity="end"
+        android:layout_marginTop="48px"
+        android:layout_marginEnd="56px"
+        android:alpha="0"
+        android:background="@drawable/shape_avatar_bg"
+        android:padding="8px"
+        android:scaleX="0"
+        android:scaleY="0"
+        tools:alpha="1"
+        tools:scaleX="1"
+        tools:scaleY="1" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#3000"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/mock_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="模拟触发传感器⚖️"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/mock_camera_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="模拟靠近摄像头📷"
+            android:textColor="@color/white" />
+
+
+        <TextView
+            android:id="@+id/exit_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="↩退出DEMO"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+</FrameLayout>

@@ -2,6 +2,8 @@ package im.whale.whaleplaysdk;
 
 import android.app.Application;
 
+import com.danikula.videocache.HttpProxyCacheServer;
+
 /**
  * Created on 2019-08-31.
  *
@@ -19,6 +21,16 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         sApp = this;
+
+        mHttpProxyCacheServer = new HttpProxyCacheServer.Builder(this)
+                .maxCacheSize(4L * 1024 * 1024 * 1024)       // 4 Gb for cache
+                .build();
+    }
+
+    private HttpProxyCacheServer mHttpProxyCacheServer;
+
+    public HttpProxyCacheServer getHttpProxy() {
+        return mHttpProxyCacheServer;
     }
 
 }

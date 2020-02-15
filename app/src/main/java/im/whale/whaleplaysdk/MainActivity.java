@@ -12,6 +12,7 @@ import java.util.Date;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import im.whale.whaleplaysdk.demo.DemoActivity;
 import im.whale.whaleplaysdk.message.MessageReceiver;
 
 /**
@@ -25,7 +26,7 @@ import im.whale.whaleplaysdk.message.MessageReceiver;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_SN = 118;
+    private static final int REQUEST_SN = 1218;
 
     private MessageReceiver mCommonMessageReceiver;
     private MessageReceiver mCameraMessageReceiver;
@@ -40,6 +41,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mInfoTv = findViewById(R.id.info_tv);
         mMessageTv = findViewById(R.id.message_tv);
+        findViewById(R.id.demo_btn).setOnClickListener(v -> {
+//            mCommonMessageReceiver.unregister(this);
+//            mCameraMessageReceiver.unregister(this);
+//            mDeviceMessageReceiver.unregister(this);
+
+            mCommonCheckBox.setChecked(false);
+            mCameraCheckBox.setChecked(false);
+            mDeviceCheckBox.setChecked(false);
+
+            startActivity(new Intent(MainActivity.this, DemoActivity.class));
+        });
+
         mCommonCheckBox = findViewById(R.id.common_check_box);
         mCameraCheckBox = findViewById(R.id.camera_check_box);
         mDeviceCheckBox = findViewById(R.id.device_check_box);

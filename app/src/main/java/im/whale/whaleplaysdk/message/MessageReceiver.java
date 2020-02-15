@@ -41,7 +41,11 @@ public class MessageReceiver extends BroadcastReceiver {
     }
 
     public void unregister(Context context) {
-        context.getApplicationContext().unregisterReceiver(this);
+        try {
+            context.getApplicationContext().unregisterReceiver(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
